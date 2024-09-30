@@ -1,9 +1,10 @@
 from aiogram import Bot, Dispatcher, types, F
-from aiogram.types import Message, KeyboardButton, ReplyKeyboardMarkup
-from aiogram.filters import CommandStart, Command
+from aiogram.types import Message
+from aiogram.filters import CommandStart
 import asyncio
 import os
 from dotenv import load_dotenv
+from keybords import keyboard, keyboard_meal
 
 load_dotenv()
 
@@ -12,23 +13,25 @@ bot = Bot(token=bot_api)
 dp = Dispatcher()
 
 
-keyboard = ReplyKeyboardMarkup(
-    keyboard=[[KeyboardButton(text="Концепция все блюда за 400")], [KeyboardButton(text='Контакты')]],
-    resize_keyboard=True)
-
-
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer('Какой вас интересует вопрос?', reply_markup=keyboard)
+    await message.answer(f'Привет {message.from_user.full_name}!\nКакой вас интересует вопрос?',
+                         reply_markup=keyboard)
 
 
-# @dp.message(F.text == 'Концепция все блюда за 400')
-# async def quastion(message: Message):
-#     await message.answer('Ебал я твой рот \n ddd \n aaa')
+@dp.message(F.text == 'Концепция все блюда за 400')
+async def quastion(message: Message):
+    await message.answer('Ебал я твой рот \n ddd \n aaa', reply_markup=keyboard_meal)
+
 
 @dp.message(F.text == 'Контакты')
 async def contacts(message: Message):
     await message.answer('Почта: test_mail@main.ru\nТелефон: 8 (800) 535 35-35')
+
+
+@dp.message(F.text == 'Назад')
+async def back(message: Message):
+    await message.answer('Остались вопросы?', reply_markup=keyboard)
 
 
 async def main():
