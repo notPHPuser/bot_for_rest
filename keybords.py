@@ -1,6 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-keyboard_meal = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='ЧТОО')], [KeyboardButton(text='Назад')]],
+keyboard_meal = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Когда все блюда за 400')], [KeyboardButton(text='Назад')]],
                                     resize_keyboard=True)
 
 keyboard = ReplyKeyboardMarkup(
